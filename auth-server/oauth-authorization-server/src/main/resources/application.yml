@@ -17,5 +17,5 @@ keycloak:
     adminUser:
       username: ${KEYCLOAK_ADMIN_USER}
       password: ${KEYCLOAK_ADMIN_PASSWORD}
-    realmImportFile: baeldung-realm.json
+    realmImportFile: realm.json
 
