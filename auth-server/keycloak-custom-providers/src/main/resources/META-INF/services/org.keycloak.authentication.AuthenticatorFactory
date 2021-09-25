@@ -1,1 +1,2 @@
-phone.MobileAuthenticationFactory
+com.demo.anthentication.authenticator.sms.KeycloakSmsAuthenticatorFactory
+com.demo.anthentication.authenticator.user.UserAuthenticatorFactory

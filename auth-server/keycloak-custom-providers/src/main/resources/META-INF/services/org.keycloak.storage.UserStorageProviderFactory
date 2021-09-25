@@ -1,1 +1,2 @@
-com.baeldung.auth.provider.user.CustomUserStorageProviderFactory
+com.demo.storage.user.CustomUserStorageProviderFactory
+demo.DemoUserStorageProviderFactory
