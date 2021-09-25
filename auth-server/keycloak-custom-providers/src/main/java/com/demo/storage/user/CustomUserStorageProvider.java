@@ -59,20 +59,29 @@ public class CustomUserStorageProvider implements UserStorageProvider,
     @Override
     public UserModel getUserByUsername(String username, RealmModel realm) {
         log.info("[I41] getUserByUsername({})",username);
-        return new CustomUser.Builder(ksession, realm, model, username)
-                .email("")
-                .firstName("")
-                .lastName("")
-                .cpf("22222222222")
-                .build();
 
+        try ( Connection c = DbUtil.getConnection(this.model)) {
+            PreparedStatement st = c.prepareStatement("select username, cpf, firstName,lastName, email, birthDate from users where username = ?");
+            st.setString(1, username);
+            st.execute();
+            ResultSet rs = st.getResultSet();
+            if ( rs.next()) {
+                return mapUser(realm,rs);
+            }
+            else {
+                return null;
+            }
+        }
+        catch(SQLException ex) {
+            throw new RuntimeException("Database error:" + ex.getMessage(),ex);
+        }
     }
 
     @Override
     public UserModel getUserByEmail(String email, RealmModel realm) {
         log.info("[I48] getUserByEmail({})",email);
         try ( Connection c = DbUtil.getConnection(this.model)) {
-            PreparedStatement st = c.prepareStatement("select username, firstName,lastName, email, birthDate from users where email = ?");
+            PreparedStatement st = c.prepareStatement("select username, cpf, firstName,lastName, email, birthDate from users where email = ?");
             st.setString(1, email);
             st.execute();
             ResultSet rs = st.getResultSet();
