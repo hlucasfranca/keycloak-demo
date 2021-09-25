@@ -11,11 +11,11 @@ import org.slf4j.LoggerFactory;
 
 public class UserAuthenticator implements Authenticator {
 
-    private static final Logger logger = LoggerFactory.getLogger(CustomUserStorageProvider.class);
+    private static final Logger logger = LoggerFactory.getLogger(UserAuthenticator.class);
 
     @Override
     public void authenticate(AuthenticationFlowContext context) {
-        logger.debug("authenticate called ... context = " + context);
+        logger.info("authenticate called ... context = " + context);
 
         String a = "";
         context.success();
@@ -23,34 +23,31 @@ public class UserAuthenticator implements Authenticator {
 
     @Override
     public void action(AuthenticationFlowContext context) {
-//        logger.info("autenticado com sucesso  " + context);
-//        String a = "";
-//        context.success();
     }
 
 
     @Override
     public boolean requiresUser() {
-        logger.debug("requiresUser called ... returning true");
+        logger.info("requiresUser called ... returning true");
         return true;
     }
 
     @Override
     public boolean configuredFor(KeycloakSession session, RealmModel realm, UserModel user) {
-        logger.debug("configuredFor called ... session=" + session + ", realm=" + realm + ", user=" + user);
+        logger.info("configuredFor called ... session=" + session + ", realm=" + realm + ", user=" + user);
         boolean result = true;
-        logger.debug("... returning " + result);
+        logger.info("... returning " + result);
         return result;
     }
 
     @Override
     public void setRequiredActions(KeycloakSession session, RealmModel realm, UserModel user) {
-        logger.debug("setRequiredActions called ... session=" + session + ", realm=" + realm + ", user=" + user);
+        logger.info("setRequiredActions called ... session=" + session + ", realm=" + realm + ", user=" + user);
     }
 
     @Override
     public void close() {
-        logger.debug("close called ...");
+        logger.info("close called ...");
     }
 
 }
